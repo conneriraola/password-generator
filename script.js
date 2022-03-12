@@ -1,19 +1,11 @@
-// // Assignment Code
-// var generateBtn = document.querySelector("#generate");
+var length = Number(prompt("How many characters would you like your password to be?"));
+while (isNaN(length) || length < 8 || length > 128) length = Number(prompt("Length must be 8-128 characters. How many characters would you like your password to be?"));
 
-// // Write password to the #password input
-// function writePassword() {
-//   var password = generatePassword();
-//   var passwordText = document.querySelector("#password");
+var hasLower = (confirm("Include lowercase letters?"));
+var hasUpper = (confirm("Include uppercase letters?"));
+var hasNumber = (confirm("Include numbers?"));
+var hasCharacter = (confirm("Include special characters?"))
 
-//   passwordText.value = password;
-
-// }
-
-// // Add event listener to generate button
-// generateBtn.addEventListener("click", writePassword);
-
-// Dom elements
 const resultEl = document.getElementById ('password');
 const lengthEl = document.getElementById ('length');
 const uppercaseEl = document.getElementById ('uppercase');
@@ -21,8 +13,6 @@ const lowercaseEl = document.getElementById ('lowercase');
 const numbersEl = document.getElementById ('numbers');
 const charactersEl = document.getElementById ('characters');
 const generateEl = document.getElementById ('generate');
-const clipboardEl = document.getElementById ('clipboard');
-
 
 const randomFunc = {
     lower: getRandomLower,
@@ -31,28 +21,16 @@ const randomFunc = {
     character: getRandomCharacter
 };
 
-// Generate Event Listen
 generateEl.addEventListener('click', () => {
-    const length = +lengthEl.value;
-    const hasLower = lowercaseEl.checked;
-    const hasUpper = uppercaseEl.checked;
-    const hasNumber = numbersEl.checked;
-    const hasCharacter = charactersEl.checked;
-
     resultEl.innerText = generatePassword(hasLower, hasUpper, hasNumber, hasCharacter, length);
 });
 
-// Generate password function
 function generatePassword(lower, upper, number, character, length) {
     let generatedPassword = '';
 
     const typesCount = lower + upper + number + character;
 
-    // console.log('typesCount: ', typesCount)
-
     const typesArr = [{lower}, {upper}, {number}, {character}].filter(item => Object.values(item)[0]);
-
-    // console.log('typesArr: ', typesArr);
 
     if(typesCount === 0) {
         return '';
@@ -61,7 +39,6 @@ function generatePassword(lower, upper, number, character, length) {
     for(let i = 0; i < length; i += typesCount) {
         typesArr.forEach(type => {
             const funcName = Object.keys(type)[0];
-            // console.log('funcName: ', funcName);
 
             generatedPassword += randomFunc[funcName]();
         });
@@ -88,4 +65,6 @@ function getRandomCharacter() {
     const characters = " !%&'()*+,-./:;<=>?@[]^_`{|}~"
     return characters[Math.floor(Math.random() * characters.length)];
 }
+
+
 
