@@ -7,4 +7,4 @@ So that I can create a strong password that provides greater security
 [Deployed Link](https://conneriraola.github.io/password-generator/)
 
 ## SCREENSHOT
-<img src="asset/Password-Generator.png" width="300px">
+<img src="assets/images/Password-Generator.png" width="300px">
